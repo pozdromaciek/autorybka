@@ -5,7 +5,39 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Rybka Auto HUB</title>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bowlby+One+SC&family=Caveat:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Michroma&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>  
 <style>
+    .fade-in-3s { animation: fadeIn 3s; }
+    .fade-in-5s { animation: fadeIn 5s;}
+    .fade-in-8s { animation: fadeIn 8s;}
+    .fade-in-10s { animation: fadeIn 10s;}
+    .fade-in-right-10s { animation: fadeInRight 10s;}
+    .fade-in-left-8s { animation: fadeInLeft 8s;}
+    @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes fadeInRight {
+    0% {
+       opacity: 0;
+       transform: translateX(100px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateX(0);
+    }
+ }
+ @keyframes fadeInLeft {
+    0% {
+       opacity: 0;
+       transform: translateX(-100px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateX(0);
+    }
+ } 
   :root{
     --left-bg: #181a1e;       /* kolor tła po lewej */
     --right-bg: #181a1e;      /* kolor tła po prawej */
@@ -218,22 +250,22 @@
       <!-- Podmień href na swój link. Możesz użyć <img src="logo-left.png"> -->
       <a href="/autorybka/auto_import/" target="_blank" rel="noopener noreferrer" aria-label="Przejdź do autoimport">
         <!-- Przykładowe logo - zamień src na swój plik PNG/SVG lub użyj inline SVG -->
-        <img class="logo" src="import_logo.png" alt="Logo strony A" onerror="this.style.display='none'; document.getElementById('lfb').style.display='flex'">
+        <img class="logo fade-in-left-8s" src="import_logo.png" alt="Logo strony A" onerror="this.style.display='none'; document.getElementById('lfb').style.display='flex'">
         <div id="lfb" class="logo-fallback" style="display:none">A</div>
 
-        <div class="label">Auto Import</div>
-        <div class="sub">Samochody importowane</div>
+        <div class="label fade-in-right-8s">Auto Import</div>
+        <div class="sub fade-in-right-8s">Samochody importowane</div>
       </a>
     </section>
 
     <!-- Prawy panel -->
     <section class="panel right" aria-label="Autodetailing">
       <a href="/autorybka/auto_detailing/" target="_blank" rel="noopener noreferrer" aria-label="Przejdź do Autodetailing">
-        <img class="logo" src="detailing_logo.png" alt="Logo strony B" onerror="this.style.display='none'; document.getElementById('rfb').style.display='flex'">
+        <img class="logo fade-in-right-8s" src="detailing_logo.png" alt="Logo strony B" onerror="this.style.display='none'; document.getElementById('rfb').style.display='flex'">
         <div id="rfb" class="logo-fallback" style="display:none">B</div>
 
-        <div class="label">Auto Detailing</div>
-        <div class="sub">Studio detailingowe</div>
+        <div class="label fade-in-left-8s">Auto Detailing</div>
+        <div class="sub fade-in-left-8s">Studio detailingowe</div>
       </a>
     </section>
   </main>
@@ -278,5 +310,8 @@
       }
     })();
   </script>
+  <script>
+        AOS.init();
+    </script>
 </body>
 </html>
