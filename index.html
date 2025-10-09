@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Przejścia — wybierz stronę</title>
+  <style>
+    :root{
+      --left-bg: #0f172a;      /* kolor lewego panelu */
+      --right-bg: #0b1220;     /* kolor prawego panelu */
+      --accent: #06b6d4;       /* kolor akcentu (link/hover) */
+      --text: #ffffff;
+      --gap: 2rem;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    /* Reset i layout */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      min-height:100vh;
+      color:var(--text);
+      background: #091121;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Kontener zajmuje całą wysokość ekranu */
+    .split {
+      display:flex;
+      height:100vh;
+      width:100%;
+    }
+
+    /* Każdy panel zajmuje połowę na desktopie */
+    .panel{
+      flex:1 1 50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:var(--gap);
+      transition:transform .25s ease, box-shadow .2s ease;
+      overflow:hidden;
+      min-height:0;
+    }
+
+    /* Pełny anchor żeby cały panel był klikalny */
+    .panel a{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      width:100%;
+      height:100%;
+      text-decoration:none;
+      color:inherit;
+      outline: none;
+    }
+
+    .panel:focus-within,
+    .panel:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 10px 30px rgba(2,6,23,0.5);
+    }
+
+    /* Tła paneli */
+    .panel.left{ background: linear-gradient(180deg, var(--left-bg), #071023 60%); }
+    .panel.right{ background: linear-gradient(180deg, var(--right-bg), #05101a 60%); }
+
+    /* Logo — maksymalna szerokość, responsywne */
+    .logo{
+      max-width: 60%;
+      height: auto;
+      display:block;
+      margin-bottom:1rem;
+      pointer-events: none; /* zapobiega konfliktom z klikaniem na mobile */
+    }
+
+    /* Nagłówek / nazwa pod logo */
+    .label{
+      font-size: clamp(1rem, 2.8vw, 1.25rem);
+      letter-spacing: .03em;
+      opacity: .95;
+    }
+
+    /* Mały opis */
+    .sub{
+      font-size: .85rem;
+      opacity: .7;
+      margin-top:.5rem;
+    }
+
+    /* Focus styles dla dostępności */
+    a:focus { box-shadow: 0 0 0 4px rgba(6,182,212,0.12); border-radius: 8px; }
+
+    /* MOBILE: na urządzeniach węższych niż 720px ułożenie pionowe */
+    @media (max-width: 720px){
+      .split{
+        flex-direction: column;
+        height: auto;
+      }
+      .panel{
+        min-height: 50vh; /* każde "pół" zajmuje połowę wysokości ekranu, można zmienić */
+        padding: 1.25rem;
+      }
+      .logo{ max-width: 46%; }
+    }
+
+    /* Drobne estetyczne dopasowanie dla bardzo małych ekranów */
+    @media (max-width: 380px){
+      .logo{ max-width: 60%; }
+      .label{ font-size: 1rem; }
+    }
+
+    /* Dodatkowy styl dla lepszej czytelności gdy obrazek nie załadowany */
+    .logo-fallback{
+      width:120px;height:120px;border-radius:24px;display:flex;align-items:center;justify-content:center;
+      background:rgba(255,255,255,0.06);font-weight:700;color:rgba(255,255,255,0.85);
+      font-size:18px;letter-spacing:.03em;padding:8px;
+    }
+  </style>
+</head>
+<body>
+  <main class="split" role="main" aria-label="Wybierz stronę docelową">
+    <!-- Lewy panel -->
+    <section class="panel left" aria-label="Przejdź do strony A">
+      <!-- Podmień href na swój link. Możesz użyć <img src="logo-left.png"> -->
+      <a href="https://example-left.com" target="_blank" rel="noopener noreferrer" aria-label="Otwórz stronę A w nowej karcie">
+        <!-- Przykładowe logo - zamień src na swój plik PNG/SVG lub użyj inline SVG -->
+        <img class="logo" src="logo-left.png" alt="Logo strony A" onerror="this.style.display='none'; document.getElementById('lfb').style.display='flex'">
+        <div id="lfb" class="logo-fallback" style="display:none">A</div>
+
+        <div class="label">Strona A</div>
+        <div class="sub">Kliknij, aby przejść do strony A</div>
+      </a>
+    </section>
+
+    <!-- Prawy panel -->
+    <section class="panel right" aria-label="Przejdź do strony B">
+      <a href="https://example-right.com" target="_blank" rel="noopener noreferrer" aria-label="Otwórz stronę B w nowej karcie">
+        <img class="logo" src="logo-right.png" alt="Logo strony B" onerror="this.style.display='none'; document.getElementById('rfb').style.display='flex'">
+        <div id="rfb" class="logo-fallback" style="display:none">B</div>
+
+        <div class="label">Strona B</div>
+        <div class="sub">Kliknij, aby przejść do strony B</div>
+      </a>
+    </section>
+  </main>
+
+  <!-- Opcjonalny: mały skrypt żeby lepiej obsłużyć touch/kliknięcia (nie jest wymagany) -->
+  <script>
+    // Nic krytycznego — tylko prosty enhancement: dotyk na mobile nie powoduje przypadkowego hover weirdness.
+    (function(){
+      if('ontouchstart' in window) {
+        document.documentElement.classList.add('touch');
+      }
+    })();
+  </script>
+</body>
+</html>
