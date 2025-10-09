@@ -1,0 +1,124 @@
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rybka Autodetailing</title>
+
+        <link rel="stylesheet" href="style/root.css">
+        <link rel="stylesheet" href="style/navbar.css">
+        <link rel="stylesheet" href="style/skeleton.css">
+        <link rel="stylesheet" href="style/animations.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bowlby+One+SC&family=Caveat:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Michroma&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <!-- Dodanie Font Awesome do strony -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+        <!-- Animations on scroll -->
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    </head>
+
+    <body>
+        <nav class="navbar fade-in-3s">  
+            <div class="navbar-brand fade-in"><img src="img/logo.png" alt="Logo"></div>
+            <div class="navbar-toggle" id="navbar-toggle">&#9776;</div>
+            <ul class="navbar-menu" id="navbar-menu">
+                <li><a href="./index.html">Strona Główna</a></li>
+                <li><a href="./realizacje.html" class="navbar-active">Realizacje</a></li>
+                <li><a href="./oferta.html">Oferta</a></li>
+                <li><a href="./onas.html">O nas</a></li>
+                <li><a href="./kontakt.html">Kontakt</a></li>
+            </ul>
+        </nav>
+        <div class="section-header fade-in-3s">
+            
+            <h1>NASZE REALIZACJE</h1>
+            <p>RYBKA AUTODETAILING</p>
+        </div>
+ 
+        <!-- Auto 1 START | FADE Right-->
+        <div class="container fade-in-5s" data-aos="fade-right" data-aos-offset="300">
+            <div class="car-info">
+                <h1>BMW X5</h1>
+                <p>Full Front PPF + Ceramika</p>
+            </div>
+            <div class="slider">
+                <div class="slider-container">
+                    <div class="slide"><img src="img/bmwx5/1.jpg" alt="BMW X5 Image 1"></div>
+                    <div class="slide"><img src="img/bmwx5/2.jpg" alt="BMW X5 Image 2"></div>
+                    <div class="slide"><img src="img/bmwx5/3.jpg" alt="BMW X5 Image 3"></div>
+                    <div class="slide"><img src="img/bmwx5/4.jpg" alt="BMW X5 Image 4"></div>
+                </div>
+                <button class="slider-nav left" onclick="moveSlide(-1)">&#10094;</button>
+                <button class="slider-nav right" onclick="moveSlide(1)">&#10095;</button>
+
+            </div>
+        </div>
+        <!-- Auto 1 KONIEC-->   
+
+        <!-- Auto 2 START | FADE Left-->
+        <div class="container" data-aos="fade-left" data-aos-offset="300">
+            <div class="slider">
+                <div class="slider-container">
+                    <div class="slide"><img src="img/main_gallery/1.jpg" alt="Main Gallery Image 1"></div>
+                    <div class="slide"><img src="img/main_gallery/2.jpg" alt="Main Gallery Image 2"></div>
+                    <div class="slide"><img src="img/main_gallery/3.jpg" alt="Main Gallery Image 3"></div>
+                    <div class="slide"><img src="img/main_gallery/4.jpg" alt="Main Gallery Image 4"></div>
+                </div>
+                <button class="slider-nav left" onclick="moveSlide(-1)">&#10094;</button>
+                <button class="slider-nav right" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+            <div class="car-info">
+                <h1>Mercedes GT AMG</h1>
+                <p>Full Body PPF</p>
+            </div>
+        </div>
+        <!-- Auto 2 KONIEC-->   
+
+        <!-- Auto 3 START | FADE Right-->
+        <div class="container" data-aos="fade-right" data-aos-offset="300">
+            <div class="car-info">
+                <h1>Audi A5</h1>
+                <p>Zmiana koloru - Nardo Gray</p>
+            </div>
+            <div class="slider">
+                <div class="slider-container">
+                    <div class="slide"><img src="img/a5nardo/1.jpg" alt="Audi A5 Image 1"></div>
+                    <div class="slide"><img src="img/a5nardo/2.jpg" alt="Audi A5 Image 2"></div>
+                    <div class="slide"><img src="img/a5nardo/3.jpg" alt="Audi A5 Image 3"></div>
+                    <div class="slide"><img src="img/a5nardo/4.jpg" alt="Audi A5 Image 4"></div>
+                </div>
+                <button class="slider-nav left" onclick="moveSlide(-1)">&#10094;</button>
+                <button class="slider-nav right" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+        </div>
+        <!-- Auto 3 KONIEC-->   
+
+        <!-- Auto 4 START | FADE Left-->        
+        <div class="container" data-aos="fade-left" data-aos-offset="300">
+            <div class="slider">
+                <div class="slider-container">
+                    <div class="slide"><img src="img/lexus/1.jpg" alt="Lexus LS Image 1"></div>
+                    <div class="slide"><img src="img/lexus/2.jpg" alt="Lexus LS Image 2"></div>
+                    <div class="slide"><img src="img/lexus/3.jpg" alt="Lexus LS Image 3"></div>
+                    <div class="slide"><img src="img/lexus/4.jpg" alt="Lexus LS Image 4"></div>
+                </div>
+                <button class="slider-nav left" onclick="moveSlide(-1)">&#10094;</button>
+                <button class="slider-nav right" onclick="moveSlide(1)">&#10095;</button>
+            </div>
+            <div class="car-info">
+                <h1>Lexus LS</h1>
+                <p>Full Body PPF</p>
+            </div>
+        </div>
+        <!-- Auto 4 KONIEC-->   
+
+        <script src="script/gallery_sliders.js"></script>
+        <script src="script/navbar.js"></script>
+        <script>
+            AOS.init();
+        </script>
+    </body>
+</html>

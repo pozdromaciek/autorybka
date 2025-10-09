@@ -1,0 +1,30 @@
+.fade-in-3s { animation: fadeIn 3s; }
+.fade-in-5s { animation: fadeIn 5s;}
+.fade-in-8s { animation: fadeIn 8s;}
+.fade-in-10s { animation: fadeIn 10s;}
+.fade-in-right-10s { animation: fadeInRight 10s;}
+.fade-in-left-8s { animation: fadeInLeft 8s;}
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes fadeInRight {
+    0% {
+       opacity: 0;
+       transform: translateX(100px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateX(0);
+    }
+ }
+ @keyframes fadeInLeft {
+    0% {
+       opacity: 0;
+       transform: translateX(-100px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateX(0);
+    }
+ } 

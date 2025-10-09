@@ -1,0 +1,339 @@
+.container {
+    display: flex;
+    width: 100%;
+    height: 80vh; /* Pełna wysokość okna przeglądarki */
+}
+
+.company-info {
+    flex: 1; /* Domyślnie 50% */
+    background-color: var(--kolor-tla);
+    color: var(--kolor-akcentu);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px var(--kolor-cieni); /* Opcjonalny cień dla efektu głębi */
+}
+
+.company-info h1 {
+    font-size: 2.5em;
+    margin: 0;
+    font-family: "Michroma", sans-serif;
+    font-weight: 600;
+}
+
+.company-info p {
+    font-size: 1.2em;
+    margin: 10px 0 0;
+    color: var(--kolor-tekstu);
+    font-style: italic;
+    font-weight: 300;
+}
+
+.main_slider {
+    flex: 1; /* Domyślnie 50% */
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--kolor-tla)
+}
+
+
+.main_slider-container {
+    display: flex;
+    transition: transform 5s ease-in-out;
+    height: 100%; /* Pełna wysokość slidera */
+}
+
+.main_slide {
+    min-width: 33.33%; /* Domyślnie 3 zdjęcia na raz */
+    height: 100%; /* Pełna wysokość */
+    opacity: 0.7;
+}
+
+.main_slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Zdjęcia wypełniają całą przestrzeń */
+}
+
+.main_slide:hover {
+    opacity:1;
+}
+
+@media (max-width: 768px) {
+
+}
+
+
+
+.car-info {
+    flex: 1; /* Domyślnie 50% */
+    background-color: var(--kolor-tla);
+    color: var(--kolor-naglowkow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.car-info h1 {
+    font-size: 2em;
+    margin: 0;
+    font-family: "Michroma", sans-serif;
+    font-weight: 600;
+}
+
+.car-info p {
+    font-size: 1.2em;
+    margin: 10px 0 0;
+    color: var(--kolor-tekstu);
+    font-style: italic;
+    font-weight: 300;
+}
+
+.slider {
+    flex: 2; /* Domyślnie 50% */
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--kolor-tla);
+    cursor: pointer;
+}
+
+
+.slider-container {
+    display: flex;
+    transition: transform 2.5s ease-in-out;
+    height: 100%; /* Pełna wysokość slidera */
+}
+
+.slide {
+    min-width: 50%; /* Domyślnie 3 zdjęcia na raz */
+    height: 100%; /* Pełna wysokość */
+    flex-shrink: 0;
+    transition: transform 2.5s ease-in-out;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Zdjęcia wypełniają całą przestrzeń */
+}
+
+/* Style przycisków nawigacyjnych */
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2em;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.slider-nav.left {
+    left: 10px;
+}
+
+.slider-nav.right {
+    right: 10px;
+}
+.play-button {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.play-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+/* Kontener na wskaźniki numeracji */
+.slider-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Aktywny wskaźnik */
+.indicator.active {
+    background-color: #717171;
+}
+
+
+.section-header {
+    padding-top: 100px;
+    padding-left: 10vw;
+    padding-bottom: 10vh;
+
+
+}
+.section-header h1 {
+    font-size: 2.5em;
+    font-family: "Michroma", sans-serif;
+    color: var(--kolor-akcentu);
+}
+.section-header p {
+    font-style: italic;
+}
+
+.section_container {
+    width: 100%;
+    padding: 5vh 8vw;
+    box-sizing: border-box;
+    scroll-margin-top: 60px;
+    box-shadow: 0 2px 4px var(--kolor-cieni); /* Opcjonalny cień dla efektu głębi */
+}
+
+.about {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10vw;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .car-info {
+        flex:1;
+    }
+
+    .slider-container {
+        position: relative;
+        height: 100vh; /* 80% wysokości ekranu na slider */
+    }
+
+    .slider {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+
+    .slide {
+        width: 100%; /* Na telefonie jeden obraz na raz */
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .company-info {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0,0,0,0);
+        color: white;
+        z-index: 10;
+        text-align: center;
+        width: 80%;
+    }
+
+    .main_slider-container {
+        position: relative;
+        height: 100vh; /* 80% wysokości ekranu na slider */
+    }
+
+    .main_slider {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+
+    .main_slide {
+        width: 100%; /* Na telefonie jeden obraz na raz */
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        opacity: 0.3;
+    }
+    .container {
+        flex-direction: column;
+    }
+    .car-info {
+        flex:1;
+    }
+
+    .slider-container {
+        position: relative;
+        height: 100vh; /* 80% wysokości ekranu na slider */
+    }
+
+    .slider {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+
+    .slide {
+        width: 100%; /* Na telefonie jeden obraz na raz */
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .company-info {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0,0,0,0);
+        color: white;
+        z-index: 10;
+        text-align: center;
+        width: 80%;
+    }
+
+    .main_slider-container {
+        position: relative;
+        height: 100vh; /* 80% wysokości ekranu na slider */
+    }
+
+    .main_slider {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+
+    .main_slide {
+        width: 100%; /* Na telefonie jeden obraz na raz */
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        opacity: 0.3;
+    }
+
+    .section_container {
+        flex-direction: column;
+    }
+}

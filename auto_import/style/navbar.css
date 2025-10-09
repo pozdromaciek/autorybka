@@ -1,0 +1,111 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--kolor-tla); /* Półprzezroczyste tło */
+    color: var(--kolor-naglowkow); /* Kolor tekstu navbaru */
+    padding: 40px 80px;
+    z-index: 9999; /* Wysoki z-index, aby navbar był na wierzchu */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px var(--kolor-cieni); /* Opcjonalny cień dla efektu głębi */
+    box-sizing: border-box;
+    transition: 0.3s; /* Płynne przejście dla zmiany koloru tła */
+}
+
+/* Pełne tło po przewinięciu */
+.navbar.scrolled {
+    background-color: var(--kolor-tla); /* Pełne tło */
+    padding: 20px 40px;
+}
+
+/* Pozostałe style navbaru */
+.navbar-brand {
+    font-size: 2em;
+    font-family: "Caveat", cursive;
+    font-style: normal;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.3s;
+    color: var(--kolor-tekstu);
+}
+.navbar-brand:hover {
+    font-weight: 700;
+}
+
+.navbar-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar-menu li {
+    margin-left: 20px;
+}
+
+.navbar-menu a {
+    color: var(--kolor-tekstu); /* Kolor tekstu linków navbaru */
+    text-decoration: none;
+    font-weight: 400;
+    transition: 0.5s linear;
+}
+.navbar a:hover {
+    color: var(--kolor-akcentu)
+}
+
+.navbar-toggle {
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: var(--kolor-tekstu);
+}
+
+.navbar-active {
+    color: var(--kolor-akcentu) !important; 
+    font-weight: 700 !important;
+    transition: 0.3 ease !important;
+    
+}
+.navbar-active:hover {
+    color: var(--kolor-akcentu) !important; /* Kolor tekstu linków navbaru */ 
+    text-decoration: none !important;
+}
+.navbar img {
+    height: 8vw;
+    max-height: 50px;
+}
+
+@media (max-width: 768px) {
+
+    .navbar-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: var(--kolor-tla);
+        opacity: 0.99;
+        box-shadow: 0 2px 4px var(--kolor-cieni); /* Opcjonalny cień dla efektu głębi */
+    }
+    .navbar-menu a {
+        color: var(--kolor-tekstu)
+    }
+
+    .navbar-menu.active {
+        display: flex;
+    }
+
+    .navbar-menu li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+}

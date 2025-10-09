@@ -1,0 +1,35 @@
+/* SCHEMAT KOLORÓW */
+:root {
+    --kolor-tla: #181a1e;
+    --kolor-tekstu: #E0E0E0;
+    --kolor-naglowkow: #FFFFFF;
+    --kolor-akcentu: #d12c26;
+    --kolor-cieni: rgba(0,0,0,0.4);
+}
+
+body, html {
+    background-color: var(--kolor-tla); /* Tło główne */
+    margin: 0;
+    padding: 0;
+    margin-top: 65px;
+    width: 100%;
+    font-family: "Lato", sans-serif;
+    font-optical-sizing: auto;
+    min-width: 400px; /* Minimalna szerokość strony */
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--kolor-akcentu) var(--kolor-tla);
+}
+p {
+  color: var(--kolor-tekstu);
+}
+
+
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 80px; /* Dopasuj do mniejszej wysokości na urządzeniach mobilnych */
+    }
+}
