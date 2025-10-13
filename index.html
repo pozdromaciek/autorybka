@@ -14,10 +14,11 @@
     .fade-in-5s { animation: fadeIn 5s;}
     .fade-in-8s { animation: fadeIn 8s;}
     .fade-in-10s { animation: fadeIn 10s;}
-    .fade-in-right-8s { animation: fadeInRight 10s;}
-    .fade-in-left-8s { animation: fadeInLeft 8s;}
+    .fade-in-right-8s { animation: fadeInRight 5s;}
+    .fade-in-left-8s { animation: fadeInLeft 5s;}
     @keyframes fadeIn {
     0% { opacity: 0; }
+    5% { opacity: 0; }
     100% { opacity: 1; }
   }
   @keyframes fadeInRight {
@@ -129,6 +130,7 @@
     font-size:.85rem;
     opacity:.7;
     margin-top:.5rem;
+    font-style: italic;
   }
 
   a:focus{
@@ -156,10 +158,12 @@
   }
 
     .logo{max-width:46%;}
+    .sub{max-width: 70%;}
   }
 
   @media (max-width:380px){
     .logo{max-width:60%;}
+    .sub{max-width:90%;}
     .label{font-size:1rem;}
   }
 
@@ -264,8 +268,8 @@
         <img class="logo fade-in-left-8s" src="import_logo.png" alt="Logo strony A" onerror="this.style.display='none'; document.getElementById('lfb').style.display='flex'">
         <div id="lfb" class="logo-fallback" style="display:none">A</div>
 
-        <div class="label fade-in-right-8s">Auto Import</div>
-        <div class="sub fade-in-right-8s">Samochody importowane</div>
+        <div class="label fade-in-8s">Auto Import</div>
+        <div class="sub fade-in-8s">Odwiedź nasz portal importu pojazdów używanych</div>
       </a>
     </section>
 
@@ -275,8 +279,8 @@
         <img class="logo fade-in-right-8s" src="detailing_logo.png" alt="Logo strony B" onerror="this.style.display='none'; document.getElementById('rfb').style.display='flex'">
         <div id="rfb" class="logo-fallback" style="display:none">B</div>
 
-        <div class="label fade-in-left-8s">Auto Detailing</div>
-        <div class="sub fade-in-left-8s">Studio detailingowe</div>
+        <div class="label fade-in-8s">Auto Detailing</div>
+        <div class="sub fade-in-8s">Odwiedź stronę naszego studia detailingowego</div>
       </a>
     </section>
   </main>
