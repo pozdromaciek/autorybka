@@ -369,7 +369,7 @@
     color: #aaa;
   }
 
-  .footer-left a {
+  .footer-left a, .footer-bottom a {
     color: var(--kolor-akcentu);
     text-decoration: none;
   }

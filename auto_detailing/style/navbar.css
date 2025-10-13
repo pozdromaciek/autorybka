@@ -5,7 +5,7 @@
     width: 100%;
     background-color: var(--kolor-tla); /* Półprzezroczyste tło */
     color: var(--kolor-naglowkow); /* Kolor tekstu navbaru */
-    padding: 40px 80px;
+    padding: 6vh 80px;
     z-index: 9999; /* Wysoki z-index, aby navbar był na wierzchu */
     display: flex;
     justify-content: space-between;
