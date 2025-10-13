@@ -142,9 +142,19 @@
       height:auto;
     }
     .panel{
-      min-height:50vh;
+      min-height:47vh;
       padding:1.25rem;
+      width: 90%;
+      margin-top: 2vh;
+      align-self: center ;
     }
+      .panel.left,
+  .panel.right {
+    background:#181a1e;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
     .logo{max-width:46%;}
   }
 
@@ -167,6 +177,7 @@
     letter-spacing:.03em;
     padding:8px;
   }
+
     .footer {
     background: #121316;
     color: #ccc;
@@ -249,9 +260,7 @@
   <main class="split" role="main" aria-label="Wybierz stronę docelową">
     <!-- Lewy panel -->
     <section class="panel left" aria-label="Autoimport">
-      <!-- Podmień href na swój link. Możesz użyć <img src="logo-left.png"> -->
       <a href="/autorybka/auto_import/" target="_blank" rel="noopener noreferrer" aria-label="Przejdź do autoimport">
-        <!-- Przykładowe logo - zamień src na swój plik PNG/SVG lub użyj inline SVG -->
         <img class="logo fade-in-left-8s" src="import_logo.png" alt="Logo strony A" onerror="this.style.display='none'; document.getElementById('lfb').style.display='flex'">
         <div id="lfb" class="logo-fallback" style="display:none">A</div>
 
@@ -304,7 +313,7 @@
   </footer>
 
   <!-- Opcjonalny: mały skrypt żeby lepiej obsłużyć touch/kliknięcia (nie jest wymagany) -->
-  <script>
+  <!-- <script>
     // Nic krytycznego — tylko prosty enhancement: dotyk na mobile nie powoduje przypadkowego hover weirdness.
     (function(){
       if('ontouchstart' in window) {
@@ -314,6 +323,6 @@
   </script>
   <script>
         AOS.init();
-    </script>
+    </script> -->
 </body>
 </html>
