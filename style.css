@@ -228,9 +228,12 @@
     transition: transform 0.2s ease, color 0.2s ease;
   }
 
-  .footer-right a:hover {
-    transform: scale(1.2);
+  .detailing:hover {
     color: #5AB1F5;
+  }
+
+  .import:hover {
+    color: #d12c26;
   }
 
   .footer-right svg {

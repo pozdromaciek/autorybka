@@ -1,11 +1,17 @@
+/* ============================= */
+/* ======== LAYOUT ============= */
+/* ============================= */
 .container {
     display: flex;
     width: 100%;
-    height: 92vh
+    height: 92vh;
 }
 
+/* ============================= */
+/* ======= COMPANY INFO ========= */
+/* ============================= */
 .company-info {
-    flex: 1; /* Domyślnie 50% */
+    flex: 1;
     background-color: var(--kolor-tla);
     color: var(--kolor-akcentu);
     display: flex;
@@ -14,7 +20,7 @@
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
-    box-shadow: 0 2px 4px var(--kolor-cieni); /* Opcjonalny cień dla efektu głębi */
+    box-shadow: 0 2px 4px var(--kolor-cieni);
 }
 
 .company-info h1 {
@@ -32,53 +38,46 @@
     font-style: italic;
     font-weight: 300;
 }
-@media (max-width: 768px) {
-    .company-info h1 {
-        font-size: 7vw
-    }
-    .company-info p{
-        font-size: 4vw;
-    }
-}
 
+/* ============================= */
+/* ===== MAIN SLIDER =========== */
+/* ============================= */
 .main_slider {
-    flex: 1; /* Domyślnie 50% */
+    flex: 1;
     display: flex;
     align-items: center;
     overflow: hidden;
     position: relative;
-    background-color: var(--kolor-tla)
+    background-color: var(--kolor-tla);
 }
-
 
 .main_slider-container {
     display: flex;
     transition: transform 5s ease-in-out;
-    height: 100%; /* Pełna wysokość slidera */
+    height: 100%;
 }
 
 .main_slide {
-    min-width: 33.33%; /* Domyślnie 3 zdjęcia na raz */
-    height: 100%; /* Pełna wysokość */
+    min-width: 33.33%;
+    height: 100%;
     opacity: 0.7;
 }
 
 .main_slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Zdjęcia wypełniają całą przestrzeń */
+    object-fit: cover;
 }
 
 .main_slide:hover {
-    opacity:1;
+    opacity: 1;
 }
 
-
-
-
-
+/* ============================= */
+/* ===== CAR INFO ============== */
+/* ============================= */
 .car-info {
-    flex: 1; /* Domyślnie 50% */
+    flex: 1;
     background-color: var(--kolor-tla);
     color: var(--kolor-naglowkow);
     display: flex;
@@ -104,8 +103,11 @@
     font-weight: 300;
 }
 
+/* ============================= */
+/* ========= SLIDER ============ */
+/* ============================= */
 .slider {
-    flex: 2; /* Domyślnie 50% */
+    flex: 2;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -114,16 +116,15 @@
     cursor: pointer;
 }
 
-
 .slider-container {
     display: flex;
     transition: transform 2.5s ease-in-out;
-    height: 100%; /* Pełna wysokość slidera */
+    height: 100%;
 }
 
 .slide {
-    min-width: 50%; /* Domyślnie 3 zdjęcia na raz */
-    height: 100%; /* Pełna wysokość */
+    min-width: 50%;
+    height: 100%;
     flex-shrink: 0;
     transition: transform 2.5s ease-in-out;
 }
@@ -131,15 +132,15 @@
 .slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Zdjęcia wypełniają całą przestrzeń */
+    object-fit: cover;
 }
 
-/* Style przycisków nawigacyjnych */
+/* Nawigacja slidera */
 .slider-nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0,0,0,0.5);
     color: white;
     border: none;
     font-size: 2em;
@@ -147,37 +148,31 @@
     cursor: pointer;
     z-index: 10;
 }
+.slider-nav.left { left: 10px; }
+.slider-nav.right { right: 10px; }
 
-.slider-nav.left {
-    left: 10px;
-}
-
-.slider-nav.right {
-    right: 10px;
-}
 .play-button {
     position: absolute;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0,0,0,0.5);
     color: white;
     padding: 10px;
     border: none;
     cursor: pointer;
     font-size: 16px;
 }
-
 .play-button:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0,0,0,0.8);
 }
-/* Kontener na wskaźniki numeracji */
+
+/* Wskaźniki slidera */
 .slider-indicators {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
-
 .indicator {
     width: 10px;
     height: 10px;
@@ -187,19 +182,15 @@
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
-/* Aktywny wskaźnik */
 .indicator.active {
     background-color: #717171;
 }
 
-
+/* ============================= */
+/* ======== SECTIONS =========== */
+/* ============================= */
 .section-header {
-    padding-top: 100px;
-    padding-left: 10vw;
-    padding-bottom: 10vh;
-
-
+    padding: 100px 0 10vh 10vw;
 }
 .section-header h1 {
     font-size: 2.5em;
@@ -215,7 +206,7 @@
     padding: 5vh 8vw;
     box-sizing: border-box;
     scroll-margin-top: 60px;
-    box-shadow: 0 2px 4px var(--kolor-cieni); /* Opcjonalny cień dla efektu głębi */
+    box-shadow: 0 2px 4px var(--kolor-cieni);
 }
 
 .about {
@@ -225,135 +216,101 @@
     gap: 10vw;
 }
 
-
-
-
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-    .car-info {
-        flex:1;
-    }
-
-    .slider-container {
-        position: relative;
-        height: 100vh; /* 80% wysokości ekranu na slider */
-    }
-
-    .slider {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow: hidden;
-    }
-
-    .slide {
-        width: 100%; /* Na telefonie jeden obraz na raz */
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-    }
-
-    .company-info {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(0,0,0,0);
-        color: white;
-        z-index: 10;
-        text-align: center;
-        width: 80%;
-    }
-
-    .main_slider-container {
-        position: relative;
-        height: 100vh; /* 80% wysokości ekranu na slider */
-    }
-
-    .main_slider {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow: hidden;
-    }
-
-    .main_slide {
-        width: 100%; /* Na telefonie jeden obraz na raz */
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        opacity: 0.3;
-    }
-    .container {
-        flex-direction: column;
-    }
-    .car-info {
-        flex:1;
-    }
-
-    .slider-container {
-        position: relative;
-        height: 100vh; /* 80% wysokości ekranu na slider */
-    }
-
-    .slider {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow: hidden;
-    }
-
-    .slide {
-        width: 100%; /* Na telefonie jeden obraz na raz */
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-    }
-
-    .company-info {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(0,0,0,0);
-        color: white;
-        z-index: 10;
-        text-align: center;
-        width: 80%;
-    }
-
-    .main_slider-container {
-        position: relative;
-        height: 100vh; /* 80% wysokości ekranu na slider */
-    }
-
-    .main_slider {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow: hidden;
-    }
-
-    .main_slide {
-        width: 100%; /* Na telefonie jeden obraz na raz */
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        opacity: 0.3;
-    }
-
-    .section_container {
-        flex-direction: column;
-    }
+/* ============================= */
+/* ======== SERVICES =========== */
+/* ============================= */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 2fr);
+    gap: 1vw;
+    max-width: 100vw;
+    margin: 0 auto;
+    padding: 0;
 }
 
-    .footer {
+.service-tile {
+    background: #1e1f23;
+    color: #fff;
+    text-align: center;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 15vw;
+    min-height: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+.service-tile:hover {
+    transform: scale(1.3);
+    z-index: 9999;
+}
+
+.service-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 0.8rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.service-name {
+    font-family: "Michroma", sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--kolor-akcentu);
+    transition: all 0.3s ease-in-out;
+}
+
+.service-desc {
+    font-family: "Lato", sans-serif;
+    font-size: 1rem;
+    color: #aaa;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(50px);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    width: 90%;
+    text-align: center;
+    pointer-events: none;
+}
+
+/* Efekt hover */
+.service-tile:hover .service-icon {
+    transform: translateY(-100%) scale(0.5);
+}
+.service-tile:hover .service-name {
+    transform: translateY(-100px) scale(0.8);
+}
+.service-tile:hover .service-desc {
+  opacity: 1;
+  transform: translateX(-50%);
+}
+.services-grid:hover .service-tile {
+  opacity: 0.5;
+}
+.services-grid:hover .service-tile:hover {
+  opacity: 1;
+}
+
+/* ============================= */
+/* ========= FOOTER ============ */
+/* ============================= */
+.footer {
     background: #121316;
     color: #ccc;
     text-align: center;
     padding: 2rem 1rem 1rem;
     font-family: "Lato", sans-serif;
-  }
+}
 
-  .footer-content {
+.footer-content {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -361,166 +318,136 @@
     max-width: 1000px;
     margin: 0 auto;
     gap: 2rem;
-  }
+}
 
-  .footer-left h2 {
+.footer-left h2 {
     color: #fff;
     margin-bottom: 0.5rem;
     font-family: "Michroma", sans-serif;
     letter-spacing: 0.05em;
-  }
-
-  .footer-left p {
+}
+.footer-left p {
     margin: 0.25rem 0;
     font-size: 0.9rem;
     color: #aaa;
-  }
-
-  .footer-left a, .footer-bottom a {
+}
+.footer-left a,
+.footer-bottom a {
     color: var(--kolor-akcentu);
     text-decoration: none;
-  }
-
-  .footer-left a:hover {
+}
+.footer-left a:hover {
     text-decoration: underline;
-  }
+}
 
-  .footer-right {
+.footer-right {
     display: flex;
     gap: 1.2rem;
     justify-content: center;
     flex-wrap: wrap;
-  }
-
-  .footer-right a {
+}
+.footer-right a {
     color: #fff;
     transition: transform 0.2s ease, color 0.2s ease;
-  }
-
-  .footer-right a:hover {
+}
+.footer-right a:hover {
     transform: scale(1.2);
     color: var(--kolor-akcentu);
-  }
-
-  .footer-right svg {
+}
+.footer-right svg {
     width: 28px;
     height: 28px;
-  }
+}
 
-  .footer-bottom {
+.footer-bottom {
     margin-top: 1.5rem;
     font-size: 0.8rem;
     color: #666;
-  }
+}
 
-  @media (max-width: 700px) {
+/* ============================= */
+/* ======= MEDIA QUERIES ======= */
+/* ============================= */
+
+/* FOOTER */
+@media (max-width: 700px) {
     .footer-content {
-      flex-direction: column;
-      text-align: center;
+        flex-direction: column;
+        text-align: center;
     }
-  }
-
-  .services-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 2fr);
-  gap: 1vw;
-  max-width: 100vw;
-  margin: 0 auto;
-  padding: 0;
-}
-.service-tile {
-  background: #1e1f23;
-  color: #fff;
-  text-align: center;
-  border-radius: 12px;
-  cursor: pointer;
-  width: 15vw;
-  min-height: 15vw;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; /* wyśrodkowanie logo i nazwy */
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.service-tile:hover {
-  transform: translateY(-5px);
-}
-
-.service-icon {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 0.8rem;
-  transition: transform 0.3s ease;
-}
-
-.service-name {
-  font-family: "Michroma", sans-serif;
-  font-size: 1.2rem;
-  letter-spacing: 0.03em;
-  transition: 0.3s ease;
-}
-
-.service-desc {
-  font-family: "Lato", sans-serif;
-  font-size: 1rem;
-  color: #aaa;
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  width: 90%;
-  text-align: center;
-  pointer-events: none;
-}
-
-/* Efekt hover: przesunięcie logo + nazwy w górę, pokazanie opisu */
-.service-tile:hover .service-icon{
-      transform: translateY(-100%);
-}
-.service-tile:hover .service-name {
-  transform: translateY(-50px);
-}
-
-.service-tile:hover .service-desc {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-/* Dotyk: używamy klasy .active zamiast :hover */
-.service-tile.active .service-icon,
-.service-tile.active .service-name {
-  transform: translateY(-50px);
-}
-
-.service-tile.active .service-desc {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-/* MOBILE */
+/* SERVICES MOBILE */
 @media (max-width: 720px) {
     .services-grid {
         grid-template-columns: 1fr;
         gap: 1vh;
     }
-  .service-tile {
-    width: 70vw;
-    min-height: 70vw;
-    height: auto;
-    padding: 20px;
-  }
-  .service-icon {
-    width: 50px;
-    height: 50px;
-  }
-  .service-name {
-    font-size: 2rem;
-  }
-  .service-desc {
-    font-size: 1rem;
-  }
+    .service-tile {
+        width: 70vw;
+        min-height: 70vw;
+        padding: 20px;
+    }
+    .service-name { font-size: 5vw; }
+    .service-desc { font-size: 3.5vw; }
+
+    .service-tile.active .service-icon,
+    .service-tile.active .service-name {
+        transform: translateY(-100px)!important;
+    }
+    .service-tile.active .service-desc {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-10%);
+    }
+    .service-tile:hover.service-desc {
+        opacity: 0!important;
+    }
+    .service-tile.active {
+        margin: 50px 0;
+        transform: scale(1.2)!important;
+    }
+    .service-tile:hover {
+        transform: scale(1);
+    }
+}
+
+/* GŁÓWNY UKŁAD MOBILE */
+@media (max-width: 768px) {
+    .container { flex-direction: column; }
+    .car-info { flex: 1; }
+
+    .slider-container,
+    .main_slider-container {
+        position: relative;
+        height: 100vh;
+    }
+    .slider, .main_slider {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+    .slide, .main_slide {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+    }
+    .main_slide { opacity: 0.3; }
+
+    .company-info {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0,0,0,0);
+        color: white;
+        z-index: 10;
+        text-align: center;
+        width: 80%;
+    }
+    .section_container { flex-direction: column; }
+
+    .company-info h1 { font-size: 7vw; }
+    .company-info p { font-size: 4vw; }
+    .section-header h1 { font-size: 7vw; }
 }
