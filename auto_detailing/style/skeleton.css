@@ -571,7 +571,8 @@
     .slider-container,
     .main_slider-container {
         position: relative;
-        height: 100vh;
+        width: 100vw;
+        
     }
     .slider, .main_slider {
         display: flex;
@@ -579,10 +580,7 @@
         overflow: hidden;
     }
     .slide, .main_slide {
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
+      object-fit: contain;
     }
     .main_slide { opacity: 0.3; }
 
