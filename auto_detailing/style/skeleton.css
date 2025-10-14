@@ -37,6 +37,8 @@
     color: var(--kolor-tekstu);
     font-style: italic;
     font-weight: 300;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 /* ============================= */
@@ -202,6 +204,7 @@
 }
 .section-header p {
     font-style: italic;
+    
 }
 
 .section_container {
@@ -259,6 +262,8 @@
 }
 .section_container p {
       font-size: 1.3rem;
+      text-align: justify;
+      text-justify: inter-word;
 }
 .section-header p,strong{
     color: var(--kolor-akcentu);
@@ -429,6 +434,8 @@
   font-family: "Lato", sans-serif;
   font-size: 1em!important;
   line-height: 1.;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 
