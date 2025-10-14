@@ -214,6 +214,7 @@
 }
 .section_container button {
   height: 60px;
+  line-height: 30px;
   width: 300px;
   background-color: var(--kolor-tla);
   color: var(--kolor-akcentu);
@@ -279,6 +280,12 @@
 }
 .team {
   background-image: url('../img/us.jpg'); /* Twoje tło */
+}
+.main-one {
+  background-image: url('../img/parallax1.jpg'); /* Twoje tło */
+  opacity: 0.6;
+  min-height: 30vw;
+  background-position: center;
 }
 
 
@@ -516,7 +523,8 @@
 
     .service-tile.active .service-icon,
     .service-tile.active .service-name {
-        transform: translateY(-100px)!important;
+        transform: translateY(-100px), scale(0.8)!important;
+
     }
     .service-tile.active .service-desc {
         opacity: 1;
@@ -573,11 +581,11 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: rgba(0,0,0,0);
+        background-color: rgba(0,0,0,0.2);
         color: white;
         z-index: 10;
         text-align: center;
-        width: 80%;
+        width: 100vw;
     }
     .section_container { flex-direction: column; }
 
