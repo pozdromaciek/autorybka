@@ -193,9 +193,11 @@
     padding: 100px 0 1vh 10vw;
     padding-bottom: 0!important;
 }
+.section_container h1, 
 .section-header h1 {
     font-size: 2.5em;
     font-family: "Michroma", sans-serif;
+    padding: 3vh 3vw;
     color: var(--kolor-akcentu);
 }
 .section-header p {
