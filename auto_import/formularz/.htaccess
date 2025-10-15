@@ -1,0 +1,5 @@
+AuthType Basic
+AuthName "Panel formularza"
+AuthUserFile ./domains/import.rybkaautodetailing.pl/.htpasswd
+Require admin
+ErrorDocument 401 "Niepoprawne dane logowania!"

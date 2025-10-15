@@ -1,0 +1,97 @@
+
+<?php
+// index.php
+include 'db.php';
+
+// Pobranie aut wraz z pierwszym zdjęciem (kolumna sciezka)
+$sql = "
+SELECT a.*, 
+       (SELECT z.sciezka 
+        FROM zdjecia z 
+        WHERE z.id_auta = a.id_auta 
+        ORDER BY COALESCE(z.kolejnosc, 0) ASC, z.id_zdjecia ASC
+        LIMIT 1) AS zdjecie_glowne
+FROM auta a
+ORDER BY a.data_dodania DESC
+";
+
+$result = $conn->query($sql);
+?>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rybka Auto Import | Ogłoszenia</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="../style/navbar.css">
+    <link rel="stylesheet" href="../style/root.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bowlby+One+SC&family=Caveat:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Michroma&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+        <nav class="navbar fade-in-3s"> 
+            <div class="navbar-brand"><img src="../img/logo.png" alt=""></div>
+            <div class="navbar-toggle" id="navbar-toggle">
+                &#9776;
+            </div>
+            <ul class="navbar-menu" id="navbar-menu">
+                <li><a href="../index.html">Strona Główna</a></li>
+                <li><a href="../uslugi.html">Usługi</a></li>
+                <li><a href="../ogloszenia/" class="navbar-active">Oferta</a></li>
+                <li><a href="../onas.html">O nas</a></li>
+                <li><a href="../kontakt.html">Kontakt</a></li>
+            </ul>
+        </nav>
+<div class="list-container">
+        <h1>Aktualne ogłoszenia</h1>
+
+        <?php if ($result->num_rows > 0): ?>
+            <?php while($row = $result->fetch_assoc()): ?>
+                <?php 
+                    // Jeśli auto ma zdjęcie, używamy jego ścieżki, inaczej placeholder
+                    $img = !empty($row['zdjecie_glowne']) ? '../formularz/' . $row['zdjecie_glowne'] : '../formularz/uploads/placeholder.jpg';
+                ?>
+        <div class="auto-kafelek">
+            <a href="pojazd?id=<?php echo $row['id_auta']; ?>" style="display:flex; text-decoration:none; color:inherit; width:100%;">
+                <img src="<?php echo htmlspecialchars($img); ?>" alt="<?php echo htmlspecialchars($row['marka'] . ' ' . $row['model']); ?>">
+                <div class="auto-dane">
+                    <p class="auto-cena"><?php echo number_format($row['cena'], 0, ',', ' '); ?> PLN</p>
+                    <h2><?php echo htmlspecialchars($row['marka'] . ' ' . $row['model']); ?></h2>
+                    <p>Rok produkcji: <?php echo htmlspecialchars($row['rok_produkcji']); ?></p>
+                    <p>Przebieg: <?php echo number_format($row['przebieg'], 0, ',', ' '); ?> km</p>
+                </div>
+            </a>
+        </div>
+
+
+    <?php endwhile; ?>
+<?php else: ?>
+    <p>Brak ogłoszeń.</p>
+<?php endif; ?>
+</div>
+<?php $conn->close(); ?>
+          <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-left">
+        <h2>Rybka Auto Import</h2>
+        <p>ul. Zwycięstwa 63, 44-230 Stanowice</p>
+        <p>tel. <a href="tel:+48665466673">+48 665 466 673</a></p>
+        <p>e-mail: <a href="mailto:kontakt@rybkaautohub.pl">kontakt@autorybka.pl</a></p>
+      </div>
+    <footer>
+        <div class="footer-right">
+        <a href="https://instagram.com/auto_import" target="_blank" aria-label="Instagram Auto Import">
+          <!-- Ikona Instagram -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7.75 2A5.75 5.75 0 0 0 2 7.75v8.5A5.75 5.75 0 0 0 7.75 22h8.5A5.75 5.75 0 0 0 22 16.25v-8.5A5.75 5.75 0 0 0 16.25 2h-8.5Zm0 1.5h8.5a4.25 4.25 0 0 1 4.25 4.25v8.5a4.25 4.25 0 0 1-4.25 4.25h-8.5A4.25 4.25 0 0 1 3.5 16.25v-8.5A4.25 4.25 0 0 1 7.75 3.5ZM12 7a5 5 0 1 0 0 10a5 5 0 0 0 0-10Zm0 1.5a3.5 3.5 0 1 1 0 7a3.5 3.5 0 0 1 0-7Zm5.25-.75a.75.75 0 1 1 0 1.5a.75.75 0 0 1 0-1.5Z"/></svg>
+        </a>
+
+        <a href="https://facebook.com/auto_import" target="_blank" aria-label="Facebook Auto Import">
+          <!-- Ikona Facebook -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 9H16V6h-2.5c-1.933 0-3.5 1.567-3.5 3.5V12H8v3h2.5v7h3v-7H16l.5-3h-3V9.5c0-.276.224-.5.5-.5Z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 AutoRybka. Wszystkie prawa zastrzeżone. | Design and develop <a href="https://pozdromaciek.github.io/_m.d_code/">_m.d_code</a> </div>
+  </footer>
+</body>
+</html>

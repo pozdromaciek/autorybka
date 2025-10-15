@@ -2,8 +2,8 @@
 .fade-in-5s { animation: fadeIn 5s;}
 .fade-in-8s { animation: fadeIn 8s;}
 .fade-in-10s { animation: fadeIn 10s;}
-.fade-in-right-10s { animation: fadeInRight 10s;}
-.fade-in-left-8s { animation: fadeInLeft 8s;}
+.fade-in-right-10s { animation: fadeInRight 1s;}
+.fade-in-left-8s { animation: fadeInLeft 2s;}
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
