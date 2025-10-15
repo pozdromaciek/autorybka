@@ -231,8 +231,7 @@
   margin-bottom: 10px;
   text-transform: uppercase;
   font-family: "Michroma", sans-serif;
-  color: var(--kolor-akcentu);
-  padding: 8vw 8vh;
+  color: var(--kolor-akcentu);                                                    
 }
 
 .section-header div, button:hover {
@@ -275,6 +274,23 @@
     align-items: center;
     gap: 10vw;
     min-height: 80vh;
+}
+.contact {
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+}
+.contact a {
+  color: var(--kolor-akcentu);
+  text-decoration: none;
+}
+.contact a:hover {
+  transform: translateY(10%);
+}
+.contact p {
+  text-align: center;
 }
 .parallax {
   min-height: 60vw;
@@ -452,7 +468,10 @@
   text-align: justify;
   text-justify: inter-word;
 }
-
+ iframe{
+  width: 30vw;
+  height: 50vh;
+ }
 
 /* ============================= */
 /* ========= FOOTER ============ */
@@ -582,7 +601,9 @@
 @media (max-width: 768px) {
     .container { flex-direction: column; }
     .car-info { flex: 1; }
-
+    iframe {
+      width: 60vw;
+    }
     .slider-container,
     .main_slider-container {
         position: relative;
