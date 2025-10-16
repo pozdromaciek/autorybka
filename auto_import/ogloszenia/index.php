@@ -6,10 +6,10 @@ include 'db.php';
 // Pobranie aut wraz z pierwszym zdjęciem (kolumna sciezka)
 $sql = "
 SELECT a.*, 
-       (SELECT z.sciezka 
+       (SELECT z.sciezka
         FROM zdjecia z 
         WHERE z.id_auta = a.id_auta 
-        ORDER BY COALESCE(z.kolejnosc, 0) ASC, z.id_zdjecia ASC
+        ORDER BY COALESCE(z.kolejnosc, 0) ASC, z.glowne DESC
         LIMIT 1) AS zdjecie_glowne
 FROM auta a
 ORDER BY a.data_dodania DESC
@@ -22,11 +22,18 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/ikona.ico?v=2" type="image/x-icon" />
+  <link rel="shortcut icon" href="../img/ikona.ico?v=2" type="image/x-icon" /> 
+    <link rel="icon" href="../img/ikona.ico?v=2" type="image/x-icon" />
+    <link rel="shortcut icon" href="../img/ikona.ico?v=2" type="image/x-icon" />  
     <title>Rybka Auto Import | Ogłoszenia</title>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="../style/navbar.css">
     <link rel="stylesheet" href="../style/root.css">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bowlby+One+SC&family=Caveat:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Michroma&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="../script/navbar.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>   
 </head>
 <body>
         <nav class="navbar fade-in-3s"> 
@@ -43,7 +50,7 @@ $result = $conn->query($sql);
             </ul>
         </nav>
 <div class="list-container">
-        <h1>Aktualne ogłoszenia</h1>
+        <h1 class="fade-in-3s" data-aos="fade-top" data-aos-offset="300" data-aos-duration="1000">Aktualne ogłoszenia</h1>
 
         <?php if ($result->num_rows > 0): ?>
             <?php while($row = $result->fetch_assoc()): ?>
@@ -51,14 +58,17 @@ $result = $conn->query($sql);
                     // Jeśli auto ma zdjęcie, używamy jego ścieżki, inaczej placeholder
                     $img = !empty($row['zdjecie_glowne']) ? '../formularz/' . $row['zdjecie_glowne'] : '../formularz/uploads/placeholder.jpg';
                 ?>
-        <div class="auto-kafelek">
-            <a href="pojazd?id=<?php echo $row['id_auta']; ?>" style="display:flex; text-decoration:none; color:inherit; width:100%;">
+        <div class="auto-kafelek fade-in-3s" data-aos="fade-left" data-aos-offset="300">
+            <a href="pojazd?id=<?php echo $row['id_auta']; ?>">
                 <img src="<?php echo htmlspecialchars($img); ?>" alt="<?php echo htmlspecialchars($row['marka'] . ' ' . $row['model']); ?>">
                 <div class="auto-dane">
                     <p class="auto-cena"><?php echo number_format($row['cena'], 0, ',', ' '); ?> PLN</p>
-                    <h2><?php echo htmlspecialchars($row['marka'] . ' ' . $row['model']); ?></h2>
-                    <p>Rok produkcji: <?php echo htmlspecialchars($row['rok_produkcji']); ?></p>
-                    <p>Przebieg: <?php echo number_format($row['przebieg'], 0, ',', ' '); ?> km</p>
+                    <h2><?php echo htmlspecialchars($row['marka'] . ' ' . $row['model']. ' ' . $row['generacja']. ' ' . $row['wersja']); ?></h2>
+                    <p><strong>Rok produkcji:</strong> <?php echo htmlspecialchars($row['rok_produkcji']); ?></p>
+                    <p><strong>Przebieg:</strong> <?php echo number_format($row['przebieg'], 0, ',', ' '); ?> km</p>
+                    <p><strong>Rodzaj paliwa:</strong> <?php echo htmlspecialchars($row['rodzaj_paliwa'], 0, ',', ' '); ?> </p>
+                    <p><strong>Pojemność skokowa:</strong> <?php echo number_format($row['pojemnosc'], 0, ',', ' '); ?> cm<sup>3</sup></p>
+                    <p><strong>Moc:</strong> <?php echo number_format($row['moc'], 0, ',', ' '); ?> KM</p>
                 </div>
             </a>
         </div>
@@ -91,7 +101,10 @@ $result = $conn->query($sql);
         </a>
       </div>
     </div>
-    <div class="footer-bottom">© 2025 AutoRybka. Wszystkie prawa zastrzeżone. | Design and develop <a href="https://pozdromaciek.github.io/_m.d_code/">_m.d_code</a> </div>
+    <div class="footer-bottom">© 2025 <a href="/formularz" class="stelth" onMouseOver="window.status=' '; return true;" target="_blank">AutoRybka</a>. Wszystkie prawa zastrzeżone. | Design and develop <a href="https://pozdromaciek.github.io/_m.d_code/">_m.d_code</a> </div>
   </footer>
+         <script>
+        AOS.init();
+    </script>
 </body>
 </html>

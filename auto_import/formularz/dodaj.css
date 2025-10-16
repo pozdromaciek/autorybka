@@ -63,6 +63,7 @@ input[type="file"] {
 input::placeholder,
 textarea::placeholder {
     color: var(--kolor-tekstu);
+   font-style: italic;
 }
 
 textarea {
@@ -70,6 +71,30 @@ textarea {
     resize: vertical;
 }
 
+select {
+    appearance: none; 
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--kolor-tla);
+    border-radius: 8px;
+    color: var(--kolor-tekstu);
+    font-size: 1em;
+    background: #1e1f23 url('data:image/svg+xml;utf8,<svg fill="%23E0E0E0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 12px center;
+    background-size: 16px;
+    padding-right: 40px; 
+    cursor: pointer;
+    box-sizing: border-box;
+}
+label {
+    color: var(--kolor-tekstu);
+}
+
+select:focus {
+    border-color: var(--kolor-akcentu);
+    background-color: #1e1f23;
+    box-shadow: 0 0 5px var(--kolor-cieni);
+    outline: none;
+}
 button {
     width: 100%;
     padding: 12px;

@@ -1,5 +1,5 @@
 <?php
-// 🔧 Raportowanie błędów (pomocne przy debugowaniu)
+// 🔧 Raportowanie błędów
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -29,14 +29,9 @@ if (isset($_GET['delete_photo']) && is_numeric($_GET['delete_photo'])) {
         $row = $result->fetch_assoc();
         $sciezka = $row['sciezka'];
 
-        // Usuń plik z serwera
-        if (file_exists($sciezka)) {
-            unlink($sciezka);
-        }
+        if (file_exists($sciezka)) unlink($sciezka);
 
-        // Usuń wpis z bazy
         $conn->query("DELETE FROM zdjecia WHERE id_zdjecia = $id_zdjecia");
-
         $success_message = "Zdjęcie zostało usunięte.";
     } else {
         $error_message = "Nie znaleziono zdjęcia.";
@@ -45,9 +40,7 @@ if (isset($_GET['delete_photo']) && is_numeric($_GET['delete_photo'])) {
 
 // 🧩 Pobranie danych auta
 $result = $conn->query("SELECT * FROM auta WHERE id_auta = $id_auta");
-if ($result->num_rows === 0) {
-    die("Nie znaleziono auta o podanym ID.");
-}
+if ($result->num_rows === 0) die("Nie znaleziono auta o podanym ID.");
 $auto = $result->fetch_assoc();
 
 // 💾 Obsługa formularza edycji
@@ -56,12 +49,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $model = $_POST['model'] ?? '';
     $rok = (int)($_POST['rok_produkcji'] ?? 0);
     $przebieg = (int)($_POST['przebieg'] ?? 0);
+    $moc = (int)($_POST['moc'] ?? 0);
+    $pojemnosc = (int)($_POST['pojemnosc'] ?? 0);
+    $rodzaj_paliwa = $_POST['rodzaj_paliwa'] ?? '';
+    $nadwozie = $_POST['nadwozie'] ?? '';
+    $skrzynia_biegow = $_POST['skrzynia_biegow'] ?? '';
+    $generacja = $_POST['generacja'] ?? '';
+    $wersja = $_POST['wersja'] ?? '';
+    $liczba_drzwi = (int)($_POST['liczba_drzwi'] ?? 0);
+    $naped = $_POST['naped'] ?? '';
     $cena = (int)($_POST['cena'] ?? 0);
     $opis = $_POST['opis'] ?? '';
 
-    $stmt = $conn->prepare("UPDATE auta SET marka=?, model=?, rok_produkcji=?, przebieg=?, cena=?, opis=? WHERE id_auta=?");
+    $stmt = $conn->prepare("UPDATE auta SET 
+        marka=?, model=?, rok_produkcji=?, przebieg=?, moc=?, pojemnosc=?, 
+        rodzaj_paliwa=?, nadwozie=?, skrzynia_biegow=?, generacja=?, wersja=?, 
+        liczba_drzwi=?, napęd=?, cena=?, opis=? 
+        WHERE id_auta=?"
+    );
+
     if ($stmt) {
-        $stmt->bind_param("ssiiisi", $marka, $model, $rok, $przebieg, $cena, $opis, $id_auta);
+        $stmt->bind_param(
+            "ssiiiissssssssss",
+            $marka,
+            $model,
+            $rok,
+            $przebieg,
+            $moc,
+            $pojemnosc,
+            $rodzaj_paliwa,
+            $nadwozie,
+            $skrzynia_biegow,
+            $generacja,
+            $wersja,
+            $liczba_drzwi,
+            $naped,
+            $cena,
+            $opis,
+            $id_auta
+        );
+
         if ($stmt->execute()) {
             $success_message = "Dane auta zostały zaktualizowane.";
 
@@ -87,6 +114,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
             }
+
+            // 🔹 Obsługa głównego zdjęcia
+            if (!empty($_POST['glowne_zdjecie'])) {
+                $glowne_id = (int)$_POST['glowne_zdjecie'];
+                $conn->query("UPDATE zdjecia SET glowne=0 WHERE id_auta=$id_auta");
+                $conn->query("UPDATE zdjecia SET glowne=1 WHERE id_zdjecia=$glowne_id");
+            }
+
         } else {
             $error_message = "Błąd przy aktualizacji danych: " . $stmt->error;
         }
@@ -98,7 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 🔄 Odśwież dane auta po aktualizacji
     $result = $conn->query("SELECT * FROM auta WHERE id_auta = $id_auta");
     $auto = $result->fetch_assoc();
-    header("Location: /formularz");
 }
 ?>
 
@@ -108,98 +142,157 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Edytuj Auto</title>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bowlby+One+SC&family=Caveat:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Michroma&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="dodaj.css">
 <style>
-.zdjecia {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-.zdjecie {
-    position: relative;
-}
-.zdjecie img {
-    width: 120px;
-    height: 90px;
-    object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid var(--kolor-cieni);
-}
-.zdjecie a.usun {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    background: var(--kolor-akcentu);
-    color: white;
-    font-size: 12px;
-    padding: 3px 6px;
-    border-radius: 4px;
-    text-decoration: none;
-}
-.zdjecie a.usun:hover {
-    background: #b4231f;
-}
+.zdjecia { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
+.zdjecie { position: relative; text-align: center; }
+.zdjecie img { width: 120px; height: 90px; object-fit: cover; border-radius: 6px; border: 1px solid #ccc; }
+.zdjecie a.usun { position: absolute; top: 4px; right: 4px; background: #e74c3c; color: white; font-size: 12px; padding: 3px 6px; border-radius: 4px; text-decoration: none; }
+.zdjecie a.usun:hover { background: #b4231f; }
 </style>
 </head>
 <body>
 <div class="container">
-    <form method="post" enctype="multipart/form-data">
-        <h1>Edytuj Auto</h1>
+<form method="post" enctype="multipart/form-data">
+    <a href="/formularz" class="btn-add">Powrót do panelu</a>
+    <h1>Edytuj Auto</h1>
 
-        <?php if ($success_message): ?>
-            <p class="success"><?= $success_message ?></p>
-        <?php endif; ?>
+    <?php if ($success_message): ?><p class="success"><?= $success_message ?></p><?php endif; ?>
+    <?php if ($error_message): ?><p class="error" style="color:#e74c3c; text-align:center;"><?= $error_message ?></p><?php endif; ?>
 
-        <?php if ($error_message): ?>
-            <p class="error" style="color:#e74c3c; text-align:center;"><?= $error_message ?></p>
-        <?php endif; ?>
-
-        <div class="input-group">
-            <input type="text" name="marka" value="<?= htmlspecialchars($auto['marka']) ?>" placeholder="Marka" required>
-        </div>
-        <div class="input-group">
-            <input type="text" name="model" value="<?= htmlspecialchars($auto['model']) ?>" placeholder="Model" required>
-        </div>
-        <div class="input-group">
-            <input type="number" name="rok_produkcji" value="<?= htmlspecialchars($auto['rok_produkcji']) ?>" placeholder="Rok produkcji" required>
-        </div>
-        <div class="input-group">
-            <input type="number" name="przebieg" value="<?= htmlspecialchars($auto['przebieg']) ?>" placeholder="Przebieg" required>
-        </div>
-        <div class="input-group">
-            <input type="number" name="cena" value="<?= htmlspecialchars($auto['cena']) ?>" placeholder="Cena" required>
-        </div>
-        <div class="input-group">
-            <textarea name="opis" placeholder="Opis auta" required><?= htmlspecialchars($auto['opis']) ?></textarea>
-        </div>
-
-        <h3 style="color:var(--kolor-akcentu); font-family:'Michroma',sans-serif;">Zdjęcia:</h3>
-        <div class="zdjecia">
+    <!-- Tutaj pola auta (marka, model, rok itd.) -->
+    <div class="input-group">
+        <label>Marka</label>
+        <input type="text" name="marka" value="<?= htmlspecialchars($auto['marka']) ?>" required>
+    </div>
+    <div class="input-group">
+        <label>Model</label>
+        <input type="text" name="model" value="<?= htmlspecialchars($auto['model']) ?>" required>
+    </div>
+    <div class="input-group">
+        <label>Rok produkcji</label>
+        <input type="number" min="1920" max="<?= date('Y') ?>" name="rok_produkcji" value="<?= htmlspecialchars($auto['rok_produkcji']) ?>" required>
+    </div>
+    <div class="input-group">
+        <label>Przebieg</label>
+        <input type="number" name="przebieg" value="<?= htmlspecialchars($auto['przebieg']) ?>" required>
+    </div>
+    <div class="input-group">
+        <label>Moc</label>
+        <input type="number" name="moc" value="<?= htmlspecialchars($auto['moc']) ?>" required>
+    </div>
+    <div class="input-group">
+        <label>Pojemność</label>
+        <input type="number" name="pojemnosc" value="<?= htmlspecialchars($auto['pojemnosc']) ?>" required>
+    </div>
+    <div class="input-group">
+        <label>Rodzaj paliwa</label>
+        <select name="rodzaj_paliwa" required>
             <?php
-            $result_zdjecia = $conn->query("SELECT id_zdjecia, sciezka FROM zdjecia WHERE id_auta = $id_auta ORDER BY id_zdjecia ASC");
-            if ($result_zdjecia && $result_zdjecia->num_rows > 0) {
-                while ($zdj = $result_zdjecia->fetch_assoc()) {
-                    echo "
-                    <div class='zdjecie'>
-                        <img src='{$zdj['sciezka']}' alt='Zdjęcie auta'>
-                        <a class='usun' href='?id=$id_auta&delete_photo={$zdj['id_zdjecia']}' onclick=\"return confirm('Na pewno usunąć to zdjęcie?');\">Usuń</a>
-                    </div>";
-                }
-            } else {
-                echo "<p style='color:gray;'>Brak zdjęć.</p>";
+            $opcje_paliwa = ['benzyna','diesel','benzyna+lpg','elektryczny','hybryda'];
+            foreach ($opcje_paliwa as $p) {
+                $sel = ($auto['rodzaj_paliwa']==$p) ? 'selected' : '';
+                echo "<option value='$p' $sel>$p</option>";
             }
             ?>
-        </div>
+        </select>
+    </div>
+    <div class="input-group">
+        <label>Nadwozie</label>
+        <select name="nadwozie" required>
+            <?php
+            $opcje_nadwozie = ['kombi','sedan','suv','coupe','hatchback','compact'];
+            foreach ($opcje_nadwozie as $n) {
+                $sel = ($auto['nadwozie']==$n) ? 'selected' : '';
+                echo "<option value='$n' $sel>$n</option>";
+            }
+            ?>
+        </select>
+    </div>
+    <div class="input-group">
+        <label>Skrzynia biegów</label>
+        <select name="skrzynia_biegow" required>
+            <?php
+            $opcje_skrzynia = ['automatyczna','manualna'];
+            foreach ($opcje_skrzynia as $s) {
+                $sel = ($auto['skrzynia_biegow']==$s) ? 'selected' : '';
+                echo "<option value='$s' $sel>$s</option>";
+            }
+            ?>
+        </select>
+    </div>
+    <div class="input-group">
+        <label>Generacja</label>
+        <input type="text" name="generacja" value="<?= htmlspecialchars($auto['generacja']) ?>" required>
+    </div>
+    <div class="input-group">
+        <label>Wersja</label>
+        <input type="text" name="wersja" value="<?= htmlspecialchars($auto['wersja']) ?>" required>
+    </div>
+    <div class="input-group">
+        <label>Liczba drzwi</label>
+        <select name="liczba_drzwi" required>
+            <?php
+            $opcje_drzwi = [3,5];
+            foreach ($opcje_drzwi as $d) {
+                $sel = ($auto['liczba_drzwi']==$d) ? 'selected' : '';
+                echo "<option value='$d' $sel>$d</option>";
+            }
+            ?>
+        </select>
+    </div>
+    <div class="input-group">
+        <label>Napęd</label>
+        <select name="naped" required>
+            <?php
+            $opcje_naped = ['na przód','na tył','4x4'];
+            foreach ($opcje_naped as $n) {
+                $sel = ($auto['napęd']==$n) ? 'selected' : '';
+                echo "<option value='$n' $sel>$n</option>";
+            }
+            ?>
+        </select>
+    </div>
+    <div class="input-group">
+        <label>Cena</label>
+        <input type="number" name="cena" value="<?= htmlspecialchars($auto['cena']) ?>" required>
+    </div>
+    <div class="input-group">
+        <label>Opis</label>
+        <textarea name="opis" required><?= htmlspecialchars($auto['opis']) ?></textarea>
+    </div>
 
-        <div class="input-group">
-            <input type="file" name="zdjecia[]" multiple accept="image/*">
-        </div>
+    <h3 style="color:#3498db;">Zdjęcia:</h3>
+    <div class="zdjecia">
+        <?php
+        $result_zdjecia = $conn->query("SELECT id_zdjecia, sciezka, glowne FROM zdjecia WHERE id_auta = $id_auta ORDER BY id_zdjecia ASC");
+        if ($result_zdjecia && $result_zdjecia->num_rows > 0) {
+            while ($zdj = $result_zdjecia->fetch_assoc()) {
+                $checked = $zdj['glowne'] ? 'checked' : '';
+                echo "
+                <div class='zdjecie'>
+                    <img src='{$zdj['sciezka']}' alt='Zdjęcie auta'>
+                    <div style='margin-top:5px;'>
+                        <label>
+                            <input type='radio' name='glowne_zdjecie' value='{$zdj['id_zdjecia']}' $checked> Główne
+                        </label>
+                    </div>
+                    <a class='usun' href='?id=$id_auta&delete_photo={$zdj['id_zdjecia']}' onclick=\"return confirm('Na pewno usunąć to zdjęcie?');\">Usuń</a>
+                </div>";
+            }
+        } else {
+            echo "<p style='color:gray;'>Brak zdjęć.</p>";
+        }
+        ?>
+    </div>
 
-        <button type="submit">Zapisz zmiany</button>
-        <button type="button" onclick="window.location.href='/formularz';" style="margin-top:20px;">Anuluj</button>
-    </form>
+    <div class="input-group">
+        <input type="file" name="zdjecia[]" multiple accept="image/*">
+    </div>
+
+    <button type="submit">Zapisz zmiany</button>
+    <button type="button" onclick="window.location.href='/formularz';" style="margin-top:20px;">Anuluj</button>
+</form>
 </div>
 </body>
 </html>

@@ -91,8 +91,7 @@
     background:#181a1e;
   }
   .panel.left a {
-        /* cursor: url(click_red.png), auto; */
-        cursor: not-allowed;
+    cursor: url(click_red.png), auto; */
   }
   .panel.right a {
         cursor: url(click_blue.png), auto;

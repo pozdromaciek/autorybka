@@ -52,6 +52,10 @@
     font-size: 1.5em;
     color: var(--kolor-akcentu);
 }
+
+input::placeholder {
+  font-style: italic;
+}
 @media (max-width: 768px) {
     .auto-glowne {
         height: 300px;
@@ -136,3 +140,34 @@
       text-align: center;
     }
   }
+
+.najwazniejsze {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.param-box {
+    flex: 1 1 150px;
+    text-align: center;
+    color: var(--kolor-tekstu);
+}
+
+.param-box .ikona {
+    font-size: 28px;
+    color: #d12c26;
+    margin-bottom: 5px;
+}
+
+.param-box .nazwa {
+    font-weight: 600;
+    color: #d12c26;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.param-box .wartosc {
+    font-size: 16px;
+    font-weight: 500;
+}

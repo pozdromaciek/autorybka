@@ -69,7 +69,9 @@ h1 {
     object-fit: cover;
     flex-shrink: 0;
 }
-
+.btn i {
+    margin-right: 6px;
+}
 .auto-dane {
     padding: 15px;
     flex-grow: 1;
