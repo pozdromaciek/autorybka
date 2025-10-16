@@ -135,6 +135,17 @@ body {
     color: #666!important;
     cursor: text!important;
   }
+  .alert-warning {
+    background-color: var(--kolor-tla);
+    color: var(--kolor-akcentu);
+    border: 1px solid var(--kolor-akcentu);
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 5vh;
+    margin-left:10vw;
+    margin-right:10vw;
+    text-align: center;
+  }
 
   @media (max-width: 700px) {
     .footer-content {
@@ -159,7 +170,6 @@ body {
 
         .auto-kafelek img {
           width: 100%;  
-          height: auto; 
           margin-bottom: 10px;
         }
         .auto-kafelek .auto-dane {

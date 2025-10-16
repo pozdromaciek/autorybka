@@ -17,11 +17,12 @@ $auto = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 
 if (!$auto) {
-    die("Nie znaleziono auta.");
+    header("Location: /ogloszenia/?msg=nieaktualne");
+    exit;
 }
 
 // Pobranie wszystkich zdjęć auta
-$stmt = $conn->prepare("SELECT sciezka FROM zdjecia WHERE id_auta = ? ORDER BY kolejnosc ASC, id_zdjecia ASC");
+$stmt = $conn->prepare("SELECT sciezka FROM zdjecia WHERE id_auta = ? ORDER BY kolejnosc ASC, glowne DESC");
 $stmt->bind_param("i", $id_auta);
 $stmt->execute();
 $zdjecia = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
@@ -58,7 +59,7 @@ $og_description = htmlspecialchars(substr($auto['opis'], 0, 200)); // ograniczam
 <meta property="og:image" content="<?= $og_image ?>" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://<?= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ?>" />
-<meta property="og:site_name" content="Ryba Auto Import" />
+<meta property="og:site_name" content="Rybka Auto Import" />
 
 <!-- Opcjonalnie Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">

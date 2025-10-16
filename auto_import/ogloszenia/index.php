@@ -2,7 +2,11 @@
 <?php
 // index.php
 include 'db.php';
-
+if (isset($_GET['msg']) && $_GET['msg'] === 'nieaktualne') {
+    echo '<div class="alert alert-warning">
+        <p>Ogłoszenie nieaktualne — zobacz inne samochody w naszej ofercie.</p>
+    </div>';
+}
 // Pobranie aut wraz z pierwszym zdjęciem (kolumna sciezka)
 $sql = "
 SELECT a.*, 
@@ -27,7 +31,7 @@ $result = $conn->query($sql);
     <link rel="icon" href="../img/ikona.ico?v=2" type="image/x-icon" />
     <link rel="shortcut icon" href="../img/ikona.ico?v=2" type="image/x-icon" />  
     <title>Rybka Auto Import | Ogłoszenia</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css?version=2">
     <link rel="stylesheet" href="../style/navbar.css">
     <link rel="stylesheet" href="../style/root.css">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bowlby+One+SC&family=Caveat:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Michroma&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -58,7 +62,7 @@ $result = $conn->query($sql);
                     // Jeśli auto ma zdjęcie, używamy jego ścieżki, inaczej placeholder
                     $img = !empty($row['zdjecie_glowne']) ? '../formularz/' . $row['zdjecie_glowne'] : '../formularz/uploads/placeholder.jpg';
                 ?>
-        <div class="auto-kafelek fade-in-3s" data-aos="fade-left" data-aos-offset="300">
+        <div class="auto-kafelek fade-in-3s" data-aos="fade-left" data-aos-offset="100">
             <a href="pojazd?id=<?php echo $row['id_auta']; ?>">
                 <img src="<?php echo htmlspecialchars($img); ?>" alt="<?php echo htmlspecialchars($row['marka'] . ' ' . $row['model']); ?>">
                 <div class="auto-dane">
